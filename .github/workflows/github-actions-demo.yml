@@ -10,7 +10,7 @@ jobs:
           echo "Event Trigger: ${{ github.event_name }}"
           echo "OS Type: ${{ runner.os }}"
           echo "Repository: ${{ github.repository }}"
-          echo "Branch": ${{ github.ref }}"
+          echo "Branch: ${{ github.ref }}"
       - name: Check out repository code
         uses: actions/checkout@v6
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
