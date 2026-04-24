@@ -1,0 +1,11 @@
+[project]
+name = "python-actions-test"
+version = "0.1.0"
+description = "Testing Python build functionality in GitHub Actions"
+requires-python = ">=3.14"
+dependencies = ["requests"]
+
+[tool.pytest.ini_options]
+pythonpath = ["my_lambda/src"]
+testpaths = ["my_lambda/tests"]
+addopts = "-v"

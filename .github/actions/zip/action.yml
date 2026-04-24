@@ -1,0 +1,27 @@
+name: 'Zip'
+description: 'Recursively zips a directory and its contents into a single archive file'
+inputs:
+  working-directory:
+    description: 'The directory with files/directories that will be included in the archive file'
+    required: true
+  archive-file:
+    description: 'The fully qualified filename of the archive file to be created'
+    required: true
+  options:
+    description: 'Options to add to the zip command (i.e. -x "**\/temp-files\/*")'
+    required: false
+    default: ''
+  display-name:
+    description: 'Human-readable name for the task'
+    required: false
+    default: 'Zip'
+runs:
+  using: 'composite'
+  steps:
+    - name: ${{ inputs.display-name }}
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: |
+        set -x
+        zip -r "${{ inputs.archive-file }}" . ${{ inputs.options }}
+
