@@ -16,7 +16,7 @@ jobs:
         with:
           path: repo
       - name: Create the zip archive
-        uses: ./.github/actions/zip
+        uses: ./repo/.github/actions/zip
         with:
           working-directory: ${{ github.workspace }}/repo/my_lambda/src
           archive-file: ${{ runner.temp }}/lambda.zip
