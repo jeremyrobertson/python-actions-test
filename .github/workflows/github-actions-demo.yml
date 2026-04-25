@@ -4,6 +4,8 @@ on: [push]
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
+    env:
+      REPO_DIR: repo
     steps:
       - name: Test Information
         run: |
@@ -14,9 +16,17 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v6
         with:
-          path: repo
+          path: ${{ env.REPO_DIR }}
+      - name: Debug local action path
+        run: |
+          echo "github.workspace=${{ github.workspace }}"
+          echo "repo.dir=${{ env.REPO_DIR }}"
+          ls -la ${{ github.workspace }}
+          ls -la ${{ github.workspace }}/${{ env.REPO_DIR }}
+          ls -la ${{ github.workspace }}/${{ env.REPO_DIR }}/.github/actions
+          ls -la ${{ github.workspace }}/${{ env.REPO_DIR }}/.github/actions/zip
       - name: Create the zip archive
         uses: ./repo/.github/actions/zip
         with:
-          working-directory: ${{ github.workspace }}/repo/my_lambda/src
+          working-directory: ${{ github.workspace }}/${{ env.REPO_DIR }}/my_lambda/src
           archive-file: ${{ runner.temp }}/lambda.zip
